@@ -12,7 +12,10 @@ import json
 import os
 from pathlib import Path
 
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP  # mcp 1.x
+except ImportError:  # mcp 2.x renamed FastMCP to MCPServer
+    from mcp.server.mcpserver import MCPServer as FastMCP
 
 SANDBOX = Path(__file__).resolve().parent.parent / "sandbox_repo"
 ISSUES_DB = SANDBOX / "issues.json"
